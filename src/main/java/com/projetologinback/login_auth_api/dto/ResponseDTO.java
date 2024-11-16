@@ -1,5 +1,5 @@
 package com.projetologinback.login_auth_api.dto;
 
-public class ResponseDTO {
+public record ResponseDTO (String name , String token) {
 
 }

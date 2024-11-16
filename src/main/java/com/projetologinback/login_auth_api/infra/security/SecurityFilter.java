@@ -34,9 +34,9 @@ UserRepository userRepository;
             
         var token = this.recoverToken(request);      
         var login = tokenService.validateToken(token);
-        if(token!=null){
+        if(login!=null){
                 
-                User user = userRepository.findByEMail(login);// com o login com o email da pessoa , podemos acha-lo pelo email
+                User user = userRepository.findByEMail(login).orElseThrow(()-> new RuntimeException("User not found"));// com o login com o email da pessoa , podemos acha-lo pelo email
                 var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));// roles será apenas o basico so para testar
                 var authentication = new UsernamePasswordAuthenticationToken(user, null,authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
